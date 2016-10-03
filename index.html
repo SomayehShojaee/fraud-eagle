@@ -222,7 +222,7 @@ In other words, an edge in the graph represents a review.
 Each review has a rating score.
 We assume the score is normalized in 0 to 1.</p>
 <p>Here is a sample of the bipartite graph.</p>
-digraph bipartite {
+<img src="_images/graphviz-a863ebea398b46e78f5d7830c42f4318f1b14c40.png" alt="digraph bipartite {
    graph [label=&quot;Sample bipartite graph.&quot;, rankdir = LR];
    &quot;reviewer-0&quot;;
    &quot;reviewer-1&quot;;
@@ -234,7 +234,8 @@ digraph bipartite {
    &quot;reviewer-0&quot; -&gt; &quot;product-2&quot; [label=&quot;0.6&quot;];
    &quot;reviewer-1&quot; -&gt; &quot;product-1&quot; [label=&quot;0.1&quot;];
    &quot;reviewer-1&quot; -&gt; &quot;product-2&quot; [label=&quot;0.7&quot;];
-}</div>
+}" />
+</div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="construct-a-graph">
@@ -268,7 +269,7 @@ rating score which the reviewer posted to the product.
 The normalized rating scores mean they must be in 0 to 1.</p>
 <p>For example, let us assume there are two reviewers and three products
 like the below.</p>
-digraph bipartite {
+<img src="_images/graphviz-a863ebea398b46e78f5d7830c42f4318f1b14c40.png" alt="digraph bipartite {
    graph [label=&quot;Sample bipartite graph.&quot;, rankdir = LR];
    &quot;reviewer-0&quot;;
    &quot;reviewer-1&quot;;
@@ -280,7 +281,8 @@ digraph bipartite {
    &quot;reviewer-0&quot; -&gt; &quot;product-2&quot; [label=&quot;0.6&quot;];
    &quot;reviewer-1&quot; -&gt; &quot;product-1&quot; [label=&quot;0.1&quot;];
    &quot;reviewer-1&quot; -&gt; &quot;product-2&quot; [label=&quot;0.7&quot;];
-}<p>The graph can be constructed by the following code.</p>
+}" />
+<p>The graph can be constructed by the following code.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create reviewers and products.</span>
 <span class="c1"># Note that don&#39;t create them using fraud_eagle.graph.Reviewer and</span>
 <span class="c1"># fraud_eagle.graph.Product.</span>
