@@ -1,0 +1,936 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fraud_eagle package &mdash; Fraud Eagle 0.9.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="Fraud Eagle 0.9.0 documentation" href="../index.html"/>
+        <link rel="prev" title="An implementation of Fraud Eagle" href="../index.html"/>
+<meta name="title" content="Fraud Eagle documentation"/>
+<meta name="keywords" content="review,data mining,algorithm,aaai"/>
+<meta name="description" content="Fraud Eagle is an algorithm working on review graph, which is a bipartite graph consisting of reviewer nodes and products nodes."/>
+
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Fraud Eagle documentation"/>
+<meta property="og:description" content="Fraud Eagle is an algorithm working on review graph, which is a bipartite graph consisting of reviewer nodes and products nodes." />
+<meta property="og:image" content="https://avatars0.githubusercontent.com/u/22570694" />
+<meta property="og:url" content="https://rgmining.github.io/fraud_eagle/" />
+<meta property="og:site_name" content="Review Graph Mining"/>
+<meta content="summary" name="twitter:card" />
+<meta content="@junkawamoto" name="twitter:site" />
+
+<style>
+.wy-menu-vertical{
+  position: relative;
+  height:auto !important;
+  height: 100%;
+  min-height: 100%;
+}
+.wy-menu-vertical > *:first-child{
+  padding-bottom: 600px;
+}
+</style>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4734862314145555",
+    enable_page_level_ads: true
+  });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-82315630-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Fraud Eagle
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">fraud_eagle package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fraud_eagle.constants">fraud_eagle.constants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fraud_eagle.graph">fraud_eagle.graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fraud_eagle.likelihood">fraud_eagle.likelihood module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-fraud_eagle.prior">fraud_eagle.prior module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+<div style="padding: 2em 0; height: 600px; bottom: 0; position: absolute;">
+  <div style="width: 300px; margin: auto;">
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:300px;height:600px"
+         data-ad-client="ca-pub-4734862314145555"
+         data-ad-slot="6934003829"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Fraud Eagle</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>fraud_eagle package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/rgmining/fraud-eagle" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-fraud_eagle">
+<span id="fraud-eagle-package"></span><h1>fraud_eagle package<a class="headerlink" href="#module-fraud_eagle" title="Permalink to this headline">¶</a></h1>
+<p>An implementation of Fraud Eagle algorithm.</p>
+<p>This algorithm has been introduced by Leman Akoglu, <em>et al.</em> in <a class="reference external" href="https://www.aaai.org/ocs/index.php/ICWSM/ICWSM13/paper/viewFile/5981/6338">AAAI 2013</a>.</p>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-fraud_eagle.constants">
+<span id="fraud-eagle-constants-module"></span><h2>fraud_eagle.constants module<a class="headerlink" href="#module-fraud_eagle.constants" title="Permalink to this headline">¶</a></h2>
+<p>Define constants used in Fraud Eagle package.</p>
+<dl class="data">
+<dt id="fraud_eagle.constants.BAD">
+<code class="descclassname">fraud_eagle.constants.</code><code class="descname">BAD</code><em class="property"> = 'bad'</em><a class="headerlink" href="#fraud_eagle.constants.BAD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant representing the bad label for products.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="fraud_eagle.constants.FRAUD">
+<code class="descclassname">fraud_eagle.constants.</code><code class="descname">FRAUD</code><em class="property"> = 'fraud'</em><a class="headerlink" href="#fraud_eagle.constants.FRAUD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant representing the fraud label for users.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="fraud_eagle.constants.GOOD">
+<code class="descclassname">fraud_eagle.constants.</code><code class="descname">GOOD</code><em class="property"> = 'good'</em><a class="headerlink" href="#fraud_eagle.constants.GOOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant representing the good label for products.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="fraud_eagle.constants.HONEST">
+<code class="descclassname">fraud_eagle.constants.</code><code class="descname">HONEST</code><em class="property"> = 'honest'</em><a class="headerlink" href="#fraud_eagle.constants.HONEST" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant representing the honest label for users.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="fraud_eagle.constants.MINUS">
+<code class="descclassname">fraud_eagle.constants.</code><code class="descname">MINUS</code><em class="property"> = 'minus'</em><a class="headerlink" href="#fraud_eagle.constants.MINUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant representing &#8220;-&#8221; review.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="fraud_eagle.constants.PLUS">
+<code class="descclassname">fraud_eagle.constants.</code><code class="descname">PLUS</code><em class="property"> = 'plus'</em><a class="headerlink" href="#fraud_eagle.constants.PLUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant representing &#8220;+&#8221; review.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fraud_eagle.graph">
+<span id="fraud-eagle-graph-module"></span><h2>fraud_eagle.graph module<a class="headerlink" href="#module-fraud_eagle.graph" title="Permalink to this headline">¶</a></h2>
+<p>Provide a bipartite graph class implementing Fraud Eagle algorithm.</p>
+<dl class="class">
+<dt id="fraud_eagle.graph.Product">
+<em class="property">class </em><code class="descclassname">fraud_eagle.graph.</code><code class="descname">Product</code><span class="sig-paren">(</span><em>graph</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#Product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.Product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">fraud_eagle.graph._Node</span></code></p>
+<p>Product node in ReviewGraph.</p>
+<p>Each product has a summary of its ratings. In Fraud Eagle, we uses the
+weighted average of ratings given to the product as the summary.
+The weights are anomalous scores of reviewers.</p>
+<p>Thus, letting <span class="math">\(r_{i}\)</span> be the rating given by <span class="math">\(i\)</span>-th reviewer,
+and <span class="math">\(a_{i}\)</span> be the anomalous score of <span class="math">\(i\)</span>-th reviewer,
+the summary of the product is defined as</p>
+<div class="math">
+\[\frac{\sum_{i}a_{i}r_{i}}{\sum_{i}a_{i}}\]</div>
+<dl class="attribute">
+<dt id="fraud_eagle.graph.Product.summary">
+<code class="descname">summary</code><a class="headerlink" href="#fraud_eagle.graph.Product.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Summary of ratings given to this product.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fraud_eagle.graph.Review">
+<em class="property">class </em><code class="descclassname">fraud_eagle.graph.</code><code class="descname">Review</code><span class="sig-paren">(</span><em>rating</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#Review"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.Review" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Review represents a edge in the bipartite graph.</p>
+<p>Review is an edge in the bipartite graph connecting a user to a product
+if the user reviews the product. The review has a score the user gives
+to the product. Additionally, in Fraud Eagle, each review has two message
+functions, i.e. message from the user to the product, vise versa.
+Each message function takes only two values.
+For example, the message from the user to the product can take {good, bad}.</p>
+<p>To implement those message functions, this review class maintain four values
+associated with each function and each input. But also provide message
+functions as methods.</p>
+<p>Review also has a rating score given a user to a product. We assume this
+score is normalized in <span class="math">\([0, 1]\)</span>. Fraud Eagle treats this score as a
+binary value i.e. + or -. To implement it, we choose a threshold 0.5 to
+decide each rating belonging to + group or - group, and evaluation property
+returns this label. In other words, for a review <em>r</em>,</p>
+<div class="math">
+\[\begin{split}r.evaluation =
+    \begin{cases}
+        PLUS \quad (r.rating \geq 0.5) \\
+        MINUS \quad (otherwise)
+    \end{cases}\end{split}\]</div>
+<dl class="attribute">
+<dt id="fraud_eagle.graph.Review.rating">
+<code class="descname">rating</code><a class="headerlink" href="#fraud_eagle.graph.Review.rating" title="Permalink to this definition">¶</a></dt>
+<dd><p>the normalized rating of this review.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fraud_eagle.graph.Review.evaluation">
+<code class="descname">evaluation</code><a class="headerlink" href="#fraud_eagle.graph.Review.evaluation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a label of this review.</p>
+<p>If the rating is grater or equal to <span class="math">\(0.5\)</span>,
+<a class="reference internal" href="#fraud_eagle.constants.PLUS" title="fraud_eagle.constants.PLUS"><code class="xref py py-data docutils literal"><span class="pre">PLUS</span></code></a> is returned.
+Otherwise, <a class="reference internal" href="#fraud_eagle.constants.MINUS" title="fraud_eagle.constants.MINUS"><code class="xref py py-data docutils literal"><span class="pre">MINUS</span></code></a> is returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.Review.product_to_user">
+<code class="descname">product_to_user</code><span class="sig-paren">(</span><em>label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#Review.product_to_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.Review.product_to_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message function from the product to the user associated with this review.</p>
+<p>The argument <cite>label</cite> must be one of the
+{<a class="reference internal" href="#fraud_eagle.constants.HONEST" title="fraud_eagle.constants.HONEST"><code class="xref py py-data docutils literal"><span class="pre">HONEST</span></code></a>,
+<a class="reference internal" href="#fraud_eagle.constants.FRAUD" title="fraud_eagle.constants.FRAUD"><code class="xref py py-data docutils literal"><span class="pre">FRAUD</span></code></a>}.</p>
+<p>This method returns the logarithm of the value of the message function
+for a given label.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>label</strong> &#8211; label of the user.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the logarithm of the <span class="math">\(m_{p\rightarrow u}(label)\)</span>,
+where <span class="math">\(u\)</span> and <span class="math">\(p\)</span> is the user and the product, respectively.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the given label isn&#8217;t one of {HONEST, FRAUD}.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">rating</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.Review.update_product_to_user">
+<code class="descname">update_product_to_user</code><span class="sig-paren">(</span><em>label</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#Review.update_product_to_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.Review.update_product_to_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update product-to-user message value.</p>
+<p>The argument <cite>label</cite> must be one of the
+{<a class="reference internal" href="#fraud_eagle.constants.HONEST" title="fraud_eagle.constants.HONEST"><code class="xref py py-data docutils literal"><span class="pre">HONEST</span></code></a>,
+<a class="reference internal" href="#fraud_eagle.constants.FRAUD" title="fraud_eagle.constants.FRAUD"><code class="xref py py-data docutils literal"><span class="pre">FRAUD</span></code></a>}.</p>
+<p>Note that this method doesn&#8217;t normalize any given values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>label</strong> &#8211; user label,</li>
+<li><strong>value</strong> &#8211; new message value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the given label isn&#8217;t one of {HONEST, FRAUD}.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.Review.update_user_to_product">
+<code class="descname">update_user_to_product</code><span class="sig-paren">(</span><em>label</em>, <em>value</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#Review.update_user_to_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.Review.update_user_to_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update user-to-product message value.</p>
+<p>The argument <cite>label</cite> must be one of the {<a class="reference internal" href="#fraud_eagle.constants.GOOD" title="fraud_eagle.constants.GOOD"><code class="xref py py-data docutils literal"><span class="pre">GOOD</span></code></a>,
+<a class="reference internal" href="#fraud_eagle.constants.BAD" title="fraud_eagle.constants.BAD"><code class="xref py py-data docutils literal"><span class="pre">BAD</span></code></a>}.</p>
+<p>Note that this method doesn&#8217;t normalize any given values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>label</strong> &#8211; product label,</li>
+<li><strong>value</strong> &#8211; new message value.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the given label isn&#8217;t one of {GOOD, BAD}.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.Review.user_to_product">
+<code class="descname">user_to_product</code><span class="sig-paren">(</span><em>label</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#Review.user_to_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.Review.user_to_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message function from the user to the product associated with this review.</p>
+<p>The argument <cite>label</cite> must be one of the {<a class="reference internal" href="#fraud_eagle.constants.GOOD" title="fraud_eagle.constants.GOOD"><code class="xref py py-data docutils literal"><span class="pre">GOOD</span></code></a>,
+<a class="reference internal" href="#fraud_eagle.constants.BAD" title="fraud_eagle.constants.BAD"><code class="xref py py-data docutils literal"><span class="pre">BAD</span></code></a>}.</p>
+<p>This method returns the logarithm of the value of the message function
+for a given label.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>label</strong> &#8211; label of the product.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the logarithm of the <span class="math">\(m_{u\rightarrow p}(label)\)</span>,
+where <span class="math">\(u\)</span> and <span class="math">\(p\)</span> is the user and the product, respectively.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the given label isn&#8217;t one of {GOOD, BAD}.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fraud_eagle.graph.ReviewGraph">
+<em class="property">class </em><code class="descclassname">fraud_eagle.graph.</code><code class="descname">ReviewGraph</code><span class="sig-paren">(</span><em>epsilon</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>A bipartite graph modeling reviewers and products relationships.</p>
+<dl class="attribute">
+<dt id="fraud_eagle.graph.ReviewGraph.graph">
+<code class="descname">graph</code><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph object of networkx.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fraud_eagle.graph.ReviewGraph.reviewers">
+<code class="descname">reviewers</code><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.reviewers" title="Permalink to this definition">¶</a></dt>
+<dd><p>A collection of reviewers.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fraud_eagle.graph.ReviewGraph.products">
+<code class="descname">products</code><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.products" title="Permalink to this definition">¶</a></dt>
+<dd><p>A collection of products.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fraud_eagle.graph.ReviewGraph.epsilon">
+<code class="descname">epsilon</code><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.epsilon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hyper parameter.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.add_review">
+<code class="descname">add_review</code><span class="sig-paren">(</span><em>reviewer</em>, <em>product</em>, <em>rating</em>, <em>_time=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.add_review"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.add_review" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a review from a given reviewer to a product.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reviewer</strong> &#8211; reviewer of the review,</li>
+<li><strong>product</strong> &#8211; product of the review,</li>
+<li><strong>rating</strong> &#8211; rating score of the review.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a new review.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.new_product">
+<code class="descname">new_product</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.new_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.new_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new product and add it to this graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; name of the new product.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a new product.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.new_reviewer">
+<code class="descname">new_reviewer</code><span class="sig-paren">(</span><em>name</em>, <em>anomalous=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.new_reviewer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.new_reviewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new reviewer and add it to this graph.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; name of the new reviewer,</li>
+<li><strong>_anomalous</strong> &#8211; default anomalous score (not used in this method).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a new reviewer.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.prod_message_from_products">
+<code class="descname">prod_message_from_products</code><span class="sig-paren">(</span><em>reviewer</em>, <em>product</em>, <em>ulabel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.prod_message_from_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.prod_message_from_products" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a product of messages sending to a reviewer except from a product.</p>
+<p>This helper function computes a logarithm of the product of messages such as</p>
+<div class="math">
+\[\prod_{Y_{k} \in \cal{N}_{i} \cap \cal{Y}^{\cal{P}}/product}
+m_{k \rightarrow i}(y_{i}),\]</div>
+<p>where <span class="math">\(\cal{N}_{i} \cap \cal{Y}^{\cal{P}}/product\)</span> means a set
+of products the given reviewer reviews except the given product,
+<span class="math">\(y_{i}\)</span> is a user label and one of the {HONEST, FRAUD}.</p>
+<p>If product is None, compute a product of all messages sending to the
+reviewer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reviewer</strong> &#8211; reviewer object,</li>
+<li><strong>product</strong> &#8211; product object, can be None,</li>
+<li><strong>ulabel</strong> &#8211; user label.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a logarithm of the product defined above.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.prod_message_from_users">
+<code class="descname">prod_message_from_users</code><span class="sig-paren">(</span><em>reviewer</em>, <em>product</em>, <em>plabel</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.prod_message_from_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.prod_message_from_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a product of messages to a product except from a reviewer.</p>
+<p>This helper function computes a logarithm of the product of messages such as</p>
+<div class="math">
+\[\prod_{Y_{k} \in \cal{N}_{j} \cap \cal{Y}^{\cal{U}}/user}
+m_{k\rightarrow j}(y_{j}),\]</div>
+<p>where <span class="math">\(\cal{N}_{j} \cap \cal{Y}^{\cal{U}}/user\)</span> means a set
+of reviewers who review the given product except the given reviewer,
+<span class="math">\(y_{j}\)</span> is a product label and one of the {GOOD, BAD}.</p>
+<p>If reviewer is None, compute a product of all messages sending to the
+product.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reviewer</strong> &#8211; Reviewer, can be None,</li>
+<li><strong>product</strong> &#8211; Product,</li>
+<li><strong>plabel</strong> &#8211; product label</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a logarithm of the product defined above.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.retrieve_products">
+<code class="descname">retrieve_products</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.retrieve_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.retrieve_products" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve products a given reviewer reviews.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reviewer</strong> &#8211; Reviewer.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a collection of products the given reviewer reviews.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the given reviewer isn&#8217;t an instance of Reviewer.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.retrieve_review">
+<code class="descname">retrieve_review</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.retrieve_review"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.retrieve_review" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a review a given reviewer posts to a given product.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>reviewer</strong> &#8211; Reviewer,</li>
+<li><strong>product</strong> &#8211; Product,</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a reviewer associated with the given reviewer and product.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the given reviewer isn&#8217;t an instance of Reviewer or
+the given product isn&#8217;t an instance of Product.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.retrieve_reviewers">
+<code class="descname">retrieve_reviewers</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.retrieve_reviewers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.retrieve_reviewers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve reviewers review a given product.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>product</strong> &#8211; Product.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a collection of reviewers who review the product.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; if the given product isn&#8217;t an instance of Product.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fraud_eagle.graph.ReviewGraph.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#ReviewGraph.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.ReviewGraph.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update reviewers&#8217; anomalous scores and products&#8217; summaries.</p>
+<p>For each user <span class="math">\(u\)</span>, update messages to every product <span class="math">\(p\)</span>
+the user reviews. The message function <span class="math">\(m_{u\rightarrow p}\)</span>
+takes one argument i.e. label of the receiver product.
+The label is one of {good, bad}.
+Therefore, we need to compute updated <span class="math">\(m_{u\rightarrow p}(good)\)</span>
+and <span class="math">\(m_{u\rightarrow p}(bad)\)</span>.</p>
+<p>The updated messages are defined as</p>
+<div class="math">
+\[m_{u\rightarrow p}(y_{j}) \leftarrow
+ \alpha_{1} \sum_{y_{i} \in \cal{L}_{\cal{U}}}
+ \psi_{ij}^{s}(y_{i}, y_{j}) \phi^{\cal{U}}_{i}(y_{i})
+ \prod_{Y_{k} \in \cal{N}_{i} \cap \cal{Y}^{\cal{P}}/p}
+ m_{k \rightarrow i}(y_{i}),\]</div>
+<p>where <span class="math">\(y_{j} \in {good, bad}\)</span>, and
+<span class="math">\(\cal{N}_{i} \cap \cal{Y}^{\cal{P}}/p\)</span> means a set of product
+the user <span class="math">\(u\)</span> reviews but except product <span class="math">\(p\)</span>.</p>
+<p>For each product <span class="math">\(p\)</span>, update message to every user <span class="math">\(u\)</span>
+who reviews the product. The message function <span class="math">\(m_{p\rightarrow u}\)</span>
+takes one argument i.e. label of the receiver user.
+The label is one of {honest, fraud}.
+Thus, we need to compute updated <span class="math">\(m_{p\rightarrow u}(honest)\)</span>
+and <span class="math">\(m_{p\rightarrow u}(fraud)\)</span>.</p>
+<p>The updated messages are defined as</p>
+<div class="math">
+\[m_{p\rightarrow u}(y_{i}) \leftarrow
+\alpha_{3} \sum_{y_{j} \in \cal{L}_{\cal{P}}}
+\psi_{ij}^{s}(y_{i}, y_{j}) \phi^{\cal{P}}_{j}(y_{j})
+\prod_{Y_{k} \in \cal{N}_{j} \cap \cal{Y}^{\cal{U}}/u}
+m_{k\rightarrow j}(y_{j}),\]</div>
+<p>where <span class="math">\(y_{i} \in {honest, fraud}\)</span>, and
+<span class="math">\(\cal{N}_{j} \cap \cal{Y}^{\cal{U}}/u\)</span> means a set of users
+who review the product <span class="math">\(p\)</span> but except user <span class="math">\(u\)</span>,</p>
+<p>This method runs one iteration of update for both reviewers, i.e. users
+and products. It returns the maximum difference between an old message
+value and the associated new message value. You can stop iteration when
+the update gap reaches satisfied small value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">maximum difference between an old message value and its updated new
+value.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="fraud_eagle.graph.Reviewer">
+<em class="property">class </em><code class="descclassname">fraud_eagle.graph.</code><code class="descname">Reviewer</code><span class="sig-paren">(</span><em>graph</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/graph.html#Reviewer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.graph.Reviewer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">fraud_eagle.graph._Node</span></code></p>
+<p>Reviewer node in ReviewGraph.</p>
+<p>Each reviewer has an anomalous_score property. In Fraud Eagle, we uses the
+belief that this reviewer is a fraud reviewer as the anomalous score.</p>
+<p>The belief is defined as</p>
+<div class="math">
+\[b(y_{i}) = \alpha_{2} \phi^{\cal{U}}_{i}(y_{i})
+ \prod_{Y_{j} \in \cal{N}_{i} \cap \cal{Y}_{\cal{P}}}
+ m_{j \rightarrow i}(y_{i}),\]</div>
+<p>where <span class="math">\(y_{i}\)</span> is a user label and one of the {honest, fraud} and
+<span class="math">\(\cal{N}_{i} \cap \cal{Y}_{\cal{P}}\)</span> means a set of products
+this reviewer reviews. <span class="math">\(\alpha_{2}\)</span> is a normalize constant so that
+<span class="math">\(b(honest) + b(fraud) = 1\)</span>.</p>
+<p>Thus, we use <span class="math">\(b(fraud)\)</span> as the anomalous score.</p>
+<dl class="attribute">
+<dt id="fraud_eagle.graph.Reviewer.anomalous_score">
+<code class="descname">anomalous_score</code><a class="headerlink" href="#fraud_eagle.graph.Reviewer.anomalous_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anomalous score of this reviewer.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-fraud_eagle.likelihood">
+<span id="fraud-eagle-likelihood-module"></span><h2>fraud_eagle.likelihood module<a class="headerlink" href="#module-fraud_eagle.likelihood" title="Permalink to this headline">¶</a></h2>
+<p>Define likelihood functions.</p>
+<p>This module defines a likelihood of a pair of user and product.
+See <a class="reference internal" href="#fraud_eagle.likelihood.psi" title="fraud_eagle.likelihood.psi"><code class="xref py py-meth docutils literal"><span class="pre">psi()</span></code></a> for the detailed definition of the likelihood.</p>
+<dl class="function">
+<dt id="fraud_eagle.likelihood.psi">
+<code class="descclassname">fraud_eagle.likelihood.</code><code class="descname">psi</code><span class="sig-paren">(</span><em>user</em>, <em>product</em>, <em>review</em>, <em>epsilon</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/likelihood.html#psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.likelihood.psi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Likelihood of a pair of user and product.</p>
+<p>The likelihood is dependent on the review of the user gives the product.
+The review is one of {+, -}. We defined constant representing &#8220;+&#8221; and &#8220;-&#8221;,
+thus the review is one of the {<a class="reference internal" href="#fraud_eagle.constants.PLUS" title="fraud_eagle.constants.PLUS"><code class="xref py py-data docutils literal"><span class="pre">PLUS</span></code></a>,
+<a class="reference internal" href="#fraud_eagle.constants.MINUS" title="fraud_eagle.constants.MINUS"><code class="xref py py-data docutils literal"><span class="pre">MINUS</span></code></a>}.
+On the other hand, epsilon is a given parameter.</p>
+<p>The likelihood <span class="math">\(\psi_{ij}^{s}\)</span>, where <span class="math">\(i\)</span> and <span class="math">\(j\)</span> are
+indexes of user and produce, respectively, and <span class="math">\(s\)</span> is a review
+i.e. <span class="math">\(s \in {+, -}\)</span>, is given as following tables.</p>
+<p>If the review is <a class="reference internal" href="#fraud_eagle.constants.PLUS" title="fraud_eagle.constants.PLUS"><code class="xref py py-data docutils literal"><span class="pre">PLUS</span></code></a>,</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">review: +</th>
+<th class="head">Product: Good</th>
+<th class="head">Product: Bad</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>User: Honest</td>
+<td>1 - <span class="math">\(\epsilon\)</span></td>
+<td><span class="math">\(\epsilon\)</span></td>
+</tr>
+<tr class="row-odd"><td>User: Fraud</td>
+<td>2 <span class="math">\(\epsilon\)</span></td>
+<td>1 - 2 <span class="math">\(\epsilon\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>If the review is <a class="reference internal" href="#fraud_eagle.constants.MINUS" title="fraud_eagle.constants.MINUS"><code class="xref py py-data docutils literal"><span class="pre">MINUS</span></code></a>,</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">review: -</th>
+<th class="head">Product: Good</th>
+<th class="head">Product: Bad</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>User: Honest</td>
+<td><span class="math">\(\epsilon\)</span></td>
+<td>1 - <span class="math">\(\epsilon\)</span></td>
+</tr>
+<tr class="row-odd"><td>User: Fraud</td>
+<td>1 - 2 <span class="math">\(\epsilon\)</span></td>
+<td>2 <span class="math">\(\epsilon\)</span></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>user</strong> &#8211; user label which must be one of the {         <a class="reference internal" href="#fraud_eagle.constants.HONEST" title="fraud_eagle.constants.HONEST"><code class="xref py py-data docutils literal"><span class="pre">HONEST</span></code></a>,         <a class="reference internal" href="#fraud_eagle.constants.FRAUD" title="fraud_eagle.constants.FRAUD"><code class="xref py py-data docutils literal"><span class="pre">FRAUD</span></code></a>}.</li>
+<li><strong>product</strong> &#8211; product label which must be one of the         {<a class="reference internal" href="#fraud_eagle.constants.GOOD" title="fraud_eagle.constants.GOOD"><code class="xref py py-data docutils literal"><span class="pre">GOOD</span></code></a>,         <a class="reference internal" href="#fraud_eagle.constants.BAD" title="fraud_eagle.constants.BAD"><code class="xref py py-data docutils literal"><span class="pre">BAD</span></code></a>}.</li>
+<li><strong>review</strong> &#8211; review label which must be one of the         {<a class="reference internal" href="#fraud_eagle.constants.PLUS" title="fraud_eagle.constants.PLUS"><code class="xref py py-data docutils literal"><span class="pre">PLUS</span></code></a>,         <a class="reference internal" href="#fraud_eagle.constants.MINUS" title="fraud_eagle.constants.MINUS"><code class="xref py py-data docutils literal"><span class="pre">MINUS</span></code></a>}.</li>
+<li><strong>epsilon</strong> &#8211; a float parameter in <span class="math">\([0,1]\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Float value representing a likelihood of the given values.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-fraud_eagle.prior">
+<span id="fraud-eagle-prior-module"></span><h2>fraud_eagle.prior module<a class="headerlink" href="#module-fraud_eagle.prior" title="Permalink to this headline">¶</a></h2>
+<p>Define prior beliefs of users and products.</p>
+<dl class="function">
+<dt id="fraud_eagle.prior.phi_p">
+<code class="descclassname">fraud_eagle.prior.</code><code class="descname">phi_p</code><span class="sig-paren">(</span><em>product</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/prior.html#phi_p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.prior.phi_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logarithm of a prior belief of a product.</p>
+<p>The definition is</p>
+<div class="math">
+\[\phi_{j}^{\cal{P}}: \cal{L}_{\cal{P}} \rightarrow \mathbb{R}_{\geq 0},\]</div>
+<p>where <span class="math">\(\cal{P}\)</span> is a set of produce nodes, <span class="math">\(\cal{L}_{\cal{P}}\)</span>
+is a set of product labels, and <span class="math">\(\mathbb{R}_{\geq 0}\)</span> is a set of real
+numbers grater or equals to <span class="math">\(0\)</span>.</p>
+<p>The implementation of this mapping is given as</p>
+<div class="math">
+\[\phi_{j}^{\cal{P}}(y_{j}) \leftarrow \|\cal{L}_{\cal{P}}\|.\]</div>
+<p>On the other hand, <span class="math">\(\cal{L}_{\cal{P}}\)</span> is given as {good, bad}.
+It means the mapping returns <span class="math">\(2\)</span> despite the given product.</p>
+<p>This function returns the logarithm of such <span class="math">\(\phi_{j}\)</span>, i.e.
+<span class="math">\(\log(\phi_{j}(p))\)</span> for any product <span class="math">\(p\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>user</strong> &#8211; Product object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The logarithm of the prior belief of the label of the given product.
+However, it returns <span class="math">\(\log 2\)</span> whatever the given product is.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fraud_eagle.prior.phi_u">
+<code class="descclassname">fraud_eagle.prior.</code><code class="descname">phi_u</code><span class="sig-paren">(</span><em>user</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fraud_eagle/prior.html#phi_u"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fraud_eagle.prior.phi_u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logarithm of a prior belief of a user.</p>
+<p>The definition is</p>
+<div class="math">
+\[\phi_{i}^{\cal{U}}: \cal{L}_{\cal{U}} \rightarrow \mathbb{R}_{\geq 0},\]</div>
+<p>where <span class="math">\(\cal{U}\)</span> is a set of user nodes, <span class="math">\(\cal{L}_{\cal{U}}\)</span>
+is a set of user labels, and <span class="math">\(\mathbb{R}_{\geq 0}\)</span> is a set of real
+numbers grater or equals to <span class="math">\(0\)</span>.</p>
+<p>The implementation of this mapping is given as</p>
+<div class="math">
+\[\phi_{i}^{\cal{U}}(y_{i}) \leftarrow \|\cal{L}_{\cal{U}}\|.\]</div>
+<p>On the other hand, <span class="math">\(\cal{L}_{\cal{U}}\)</span> is given as {honest, fraud}.
+It means the mapping returns <span class="math">\(\phi_{i} = 2\)</span> for any user.</p>
+<p>This function returns the logarithm of such <span class="math">\(\phi_{i}\)</span>, i.e.
+<span class="math">\(\log(\phi_{i}(u))\)</span> for any user <span class="math">\(u\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>user</strong> &#8211; User object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The logarithm of the prior belief of the label of the given user.
+However, it returns <span class="math">\(\log 2\)</span> whatever the given user is.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="An implementation of Fraud Eagle" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Junpei Kawamoto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57f1fa5b740feddd"></script>
+
+
+</body>
+</html>

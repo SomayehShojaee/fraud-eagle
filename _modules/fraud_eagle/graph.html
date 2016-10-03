@@ -1,0 +1,873 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fraud_eagle.graph &mdash; Fraud Eagle 0.9.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Fraud Eagle 0.9.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/>
+<meta name="title" content="Fraud Eagle documentation"/>
+<meta name="keywords" content="review,data mining,algorithm,aaai"/>
+<meta name="description" content="Fraud Eagle is an algorithm working on review graph, which is a bipartite graph consisting of reviewer nodes and products nodes."/>
+
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Fraud Eagle documentation"/>
+<meta property="og:description" content="Fraud Eagle is an algorithm working on review graph, which is a bipartite graph consisting of reviewer nodes and products nodes." />
+<meta property="og:image" content="https://avatars0.githubusercontent.com/u/22570694" />
+<meta property="og:url" content="https://rgmining.github.io/fraud_eagle/" />
+<meta property="og:site_name" content="Review Graph Mining"/>
+<meta content="summary" name="twitter:card" />
+<meta content="@junkawamoto" name="twitter:site" />
+
+<style>
+.wy-menu-vertical{
+  position: relative;
+  height:auto !important;
+  height: 100%;
+  min-height: 100%;
+}
+.wy-menu-vertical > *:first-child{
+  padding-bottom: 600px;
+}
+</style>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4734862314145555",
+    enable_page_level_ads: true
+  });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-82315630-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Fraud Eagle
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/fraud_eagle.html">fraud_eagle package</a></li>
+</ul>
+
+            
+          
+<div style="padding: 2em 0; height: 600px; bottom: 0; position: absolute;">
+  <div style="width: 300px; margin: auto;">
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:300px;height:600px"
+         data-ad-client="ca-pub-4734862314145555"
+         data-ad-slot="6934003829"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Fraud Eagle</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>fraud_eagle.graph</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for fraud_eagle.graph</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># graph.py</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2016 Junpei Kawamoto</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of rgmining-fraud-eagle.</span>
+<span class="c1">#</span>
+<span class="c1"># rgmining-fraud-eagle is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># rgmining-fraud-eagle is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with Foobar.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c1">#</span>
+<span class="sd">&quot;&quot;&quot;Provide a bipartite graph class implementing Fraud Eagle algorithm.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">fraud_eagle.constants</span> <span class="k">import</span> <span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">,</span> <span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">,</span> <span class="n">PLUS</span><span class="p">,</span> <span class="n">MINUS</span>
+<span class="kn">from</span> <span class="nn">fraud_eagle.likelihood</span> <span class="k">import</span> <span class="n">psi</span>
+<span class="kn">from</span> <span class="nn">fraud_eagle.prior</span> <span class="k">import</span> <span class="n">phi_p</span><span class="p">,</span> <span class="n">phi_u</span>
+<span class="kn">from</span> <span class="nn">common</span> <span class="k">import</span> <span class="n">memoized</span>
+
+
+<span class="n">_LOG_POINT_5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;Precomputed value, the logarithm of 0.5.&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">_Node</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Define a node of the bipartite graph model.</span>
+
+<span class="sd">    Each node has a reference to a graph object, and has a name.</span>
+<span class="sd">    Thus, to make a node, both of them are required.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">      graph: reference of the parent graph.</span>
+<span class="sd">      name: name of this node.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct of a node.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          graph: reference of the parent graph.</span>
+<span class="sd">          name: name of this node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a hash value of this instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">13</span> <span class="o">*</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span> <span class="o">+</span> <span class="mi">17</span> <span class="o">*</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the name of this node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+
+<div class="viewcode-block" id="Reviewer"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.Reviewer">[docs]</a><span class="k">class</span> <span class="nc">Reviewer</span><span class="p">(</span><span class="n">_Node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reviewer node in ReviewGraph.</span>
+
+<span class="sd">    Each reviewer has an anomalous_score property. In Fraud Eagle, we uses the</span>
+<span class="sd">    belief that this reviewer is a fraud reviewer as the anomalous score.</span>
+
+<span class="sd">    The belief is defined as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">       b(y_{i}) = \\alpha_{2} \\phi^{\\cal{U}}_{i}(y_{i})</span>
+<span class="sd">        \\prod_{Y_{j} \\in \\cal{N}_{i} \\cap \\cal{Y}_{\\cal{P}}}</span>
+<span class="sd">        m_{j \\rightarrow i}(y_{i}),</span>
+
+<span class="sd">    where :math:`y_{i}` is a user label and one of the {honest, fraud} and</span>
+<span class="sd">    :math:`\\cal{N}_{i} \\cap \\cal{Y}_{\\cal{P}}` means a set of products</span>
+<span class="sd">    this reviewer reviews. :math:`\\alpha_{2}` is a normalize constant so that</span>
+<span class="sd">    :math:`b(honest) + b(fraud) = 1`.</span>
+
+<span class="sd">    Thus, we use :math:`b(fraud)` as the anomalous score.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">anomalous_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Anomalous score of this reviewer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">ulabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">):</span>
+            <span class="n">b</span><span class="p">[</span><span class="n">ulabel</span><span class="p">]</span> <span class="o">=</span> <span class="n">phi_u</span><span class="p">(</span><span class="n">ulabel</span><span class="p">)</span> \
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">prod_message_from_products</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ulabel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">FRAUD</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="o">*</span><span class="n">b</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
+
+
+<div class="viewcode-block" id="Product"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.Product">[docs]</a><span class="k">class</span> <span class="nc">Product</span><span class="p">(</span><span class="n">_Node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Product node in ReviewGraph.</span>
+
+<span class="sd">    Each product has a summary of its ratings. In Fraud Eagle, we uses the</span>
+<span class="sd">    weighted average of ratings given to the product as the summary.</span>
+<span class="sd">    The weights are anomalous scores of reviewers.</span>
+
+<span class="sd">    Thus, letting :math:`r_{i}` be the rating given by :math:`i`-th reviewer,</span>
+<span class="sd">    and :math:`a_{i}` be the anomalous score of :math:`i`-th reviewer,</span>
+<span class="sd">    the summary of the product is defined as</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \\frac{\\sum_{i}a_{i}r_{i}}{\\sum_{i}a_{i}}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary of ratings given to this product.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reviewers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">retrieve_reviewers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">ratings</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span>
+            <span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">rating</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reviewers</span><span class="p">]</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">anomalous_score</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reviewers</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ratings</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Review"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.Review">[docs]</a><span class="k">class</span> <span class="nc">Review</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Review represents a edge in the bipartite graph.</span>
+
+<span class="sd">    Review is an edge in the bipartite graph connecting a user to a product</span>
+<span class="sd">    if the user reviews the product. The review has a score the user gives</span>
+<span class="sd">    to the product. Additionally, in Fraud Eagle, each review has two message</span>
+<span class="sd">    functions, i.e. message from the user to the product, vise versa.</span>
+<span class="sd">    Each message function takes only two values.</span>
+<span class="sd">    For example, the message from the user to the product can take {good, bad}.</span>
+
+<span class="sd">    To implement those message functions, this review class maintain four values</span>
+<span class="sd">    associated with each function and each input. But also provide message</span>
+<span class="sd">    functions as methods.</span>
+
+<span class="sd">    Review also has a rating score given a user to a product. We assume this</span>
+<span class="sd">    score is normalized in :math:`[0, 1]`. Fraud Eagle treats this score as a</span>
+<span class="sd">    binary value i.e. + or -. To implement it, we choose a threshold 0.5 to</span>
+<span class="sd">    decide each rating belonging to + group or - group, and evaluation property</span>
+<span class="sd">    returns this label. In other words, for a review *r*,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">       r.evaluation =</span>
+<span class="sd">           \\begin{cases}</span>
+<span class="sd">               PLUS \\quad (r.rating \\geq 0.5) \\\\</span>
+<span class="sd">               MINUS \\quad (otherwise)</span>
+<span class="sd">           \\end{cases}</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">      rating: the normalized rating of this review.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;_user_to_product&quot;</span><span class="p">,</span> <span class="s2">&quot;_product_to_user&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rating</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_user_to_product</span> <span class="o">=</span> <span class="p">{</span><span class="n">GOOD</span><span class="p">:</span> <span class="n">_LOG_POINT_5</span><span class="p">,</span> <span class="n">BAD</span><span class="p">:</span> <span class="n">_LOG_POINT_5</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_product_to_user</span> <span class="o">=</span> <span class="p">{</span><span class="n">HONEST</span><span class="p">:</span> <span class="n">_LOG_POINT_5</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">:</span> <span class="n">_LOG_POINT_5</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rating</span> <span class="o">=</span> <span class="n">rating</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">evaluation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a label of this review.</span>
+
+<span class="sd">        If the rating is grater or equal to :math:`0.5`,</span>
+<span class="sd">        :data:`PLUS&lt;fraud_eagle.constants.PLUS&gt;` is returned.</span>
+<span class="sd">        Otherwise, :data:`MINUS&lt;fraud_eagle.constants.MINUS&gt;` is returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rating</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">PLUS</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MINUS</span>
+
+<div class="viewcode-block" id="Review.user_to_product"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.Review.user_to_product">[docs]</a>    <span class="k">def</span> <span class="nf">user_to_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Message function from the user to the product associated with this review.</span>
+
+<span class="sd">        The argument `label` must be one of the {:data:`GOOD&lt;fraud_eagle.constants.GOOD&gt;`,</span>
+<span class="sd">        :data:`BAD&lt;fraud_eagle.constants.BAD&gt;`}.</span>
+
+<span class="sd">        This method returns the logarithm of the value of the message function</span>
+<span class="sd">        for a given label.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          label: label of the product.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          the logarithm of the :math:`m_{u\\rightarrow p}(label)`,</span>
+<span class="sd">          where :math:`u` and :math:`p` is the user and the product, respectively.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given label isn&#39;t one of {GOOD, BAD}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Given label isn&#39;t for a product:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_user_to_product</span><span class="p">[</span><span class="n">label</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Review.product_to_user"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.Review.product_to_user">[docs]</a>    <span class="k">def</span> <span class="nf">product_to_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Message function from the product to the user associated with this review.</span>
+
+<span class="sd">        The argument `label` must be one of the</span>
+<span class="sd">        {:data:`HONEST&lt;fraud_eagle.constants.HONEST&gt;`,</span>
+<span class="sd">        :data:`FRAUD&lt;fraud_eagle.constants.FRAUD&gt;`}.</span>
+
+<span class="sd">        This method returns the logarithm of the value of the message function</span>
+<span class="sd">        for a given label.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          label: label of the user.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          the logarithm of the :math:`m_{p\\rightarrow u}(label)`,</span>
+<span class="sd">          where :math:`u` and :math:`p` is the user and the product, respectively.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given label isn&#39;t one of {HONEST, FRAUD}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Given label isn&#39;t for a user:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_product_to_user</span><span class="p">[</span><span class="n">label</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Review.update_user_to_product"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.Review.update_user_to_product">[docs]</a>    <span class="k">def</span> <span class="nf">update_user_to_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update user-to-product message value.</span>
+
+<span class="sd">        The argument `label` must be one of the {:data:`GOOD&lt;fraud_eagle.constants.GOOD&gt;`,</span>
+<span class="sd">        :data:`BAD&lt;fraud_eagle.constants.BAD&gt;`}.</span>
+
+<span class="sd">        Note that this method doesn&#39;t normalize any given values.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          label: product label,</span>
+<span class="sd">          value: new message value.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given label isn&#39;t one of {GOOD, BAD}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Given label isn&#39;t for a product:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_user_to_product</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="Review.update_product_to_user"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.Review.update_product_to_user">[docs]</a>    <span class="k">def</span> <span class="nf">update_product_to_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update product-to-user message value.</span>
+
+<span class="sd">        The argument `label` must be one of the</span>
+<span class="sd">        {:data:`HONEST&lt;fraud_eagle.constants.HONEST&gt;`,</span>
+<span class="sd">        :data:`FRAUD&lt;fraud_eagle.constants.FRAUD&gt;`}.</span>
+
+<span class="sd">        Note that this method doesn&#39;t normalize any given values.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          label: user label,</span>
+<span class="sd">          value: new message value.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given label isn&#39;t one of {HONEST, FRAUD}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Given label isn&#39;t for a user:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_product_to_user</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div></div>
+
+
+<div class="viewcode-block" id="ReviewGraph"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph">[docs]</a><span class="k">class</span> <span class="nc">ReviewGraph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A bipartite graph modeling reviewers and products relationships.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">      graph: Graph object of networkx.</span>
+<span class="sd">      reviewers: A collection of reviewers.</span>
+<span class="sd">      products: A collection of products.</span>
+<span class="sd">      epsilon: Hyper parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">epsilon</span> <span class="o">&lt;=</span> <span class="mf">0.</span> <span class="ow">or</span> <span class="n">epsilon</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Hyper parameter epsilon must be in (0, 0.5):&quot;</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reviewers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">products</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="n">epsilon</span>
+
+<div class="viewcode-block" id="ReviewGraph.new_reviewer"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.new_reviewer">[docs]</a>    <span class="k">def</span> <span class="nf">new_reviewer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">anomalous</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># pylint: disable=unused-argument</span>
+        <span class="sd">&quot;&quot;&quot;Create a new reviewer and add it to this graph.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          name: name of the new reviewer,</span>
+<span class="sd">          _anomalous: default anomalous score (not used in this method).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a new reviewer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reviewer</span> <span class="o">=</span> <span class="n">Reviewer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">reviewer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reviewers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reviewer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reviewer</span></div>
+
+<div class="viewcode-block" id="ReviewGraph.new_product"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.new_product">[docs]</a>    <span class="k">def</span> <span class="nf">new_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new product and add it to this graph.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          name: name of the new product.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a new product.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">product</span></div>
+
+<div class="viewcode-block" id="ReviewGraph.add_review"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.add_review">[docs]</a>    <span class="k">def</span> <span class="nf">add_review</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">rating</span><span class="p">,</span> <span class="n">_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a review from a given reviewer to a product.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          reviewer: reviewer of the review,</span>
+<span class="sd">          product: product of the review,</span>
+<span class="sd">          rating: rating score of the review.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a new review.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">review</span> <span class="o">=</span> <span class="n">Review</span><span class="p">(</span><span class="n">rating</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">review</span><span class="o">=</span><span class="n">review</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">review</span></div>
+
+    <span class="nd">@memoized</span>
+<div class="viewcode-block" id="ReviewGraph.retrieve_reviewers"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.retrieve_reviewers">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_reviewers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve reviewers review a given product.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          product: Product.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a collection of reviewers who review the product.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given product isn&#39;t an instance of Product.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">Product</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Given product isn&#39;t an instance of Product:&quot;</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">predecessors</span><span class="p">(</span><span class="n">product</span><span class="p">)</span></div>
+
+    <span class="nd">@memoized</span>
+<div class="viewcode-block" id="ReviewGraph.retrieve_products"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.retrieve_products">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_products</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve products a given reviewer reviews.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          reviewer: Reviewer.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a collection of products the given reviewer reviews.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given reviewer isn&#39;t an instance of Reviewer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">Reviewer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Given reviewer isn&#39;t an instance of Reviewer:&quot;</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">successors</span><span class="p">(</span><span class="n">reviewer</span><span class="p">)</span></div>
+
+    <span class="nd">@memoized</span>
+<div class="viewcode-block" id="ReviewGraph.retrieve_review"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.retrieve_review">[docs]</a>    <span class="k">def</span> <span class="nf">retrieve_review</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve a review a given reviewer posts to a given product.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          reviewer: Reviewer,</span>
+<span class="sd">          product: Product,</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a reviewer associated with the given reviewer and product.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">          ValueError: if the given reviewer isn&#39;t an instance of Reviewer or</span>
+<span class="sd">            the given product isn&#39;t an instance of Product.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">Reviewer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Given reviewer isn&#39;t an instance of Reviwer:&quot;</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">product</span><span class="p">,</span> <span class="n">Product</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Given product isn&#39;t an instance of Product:&quot;</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">reviewer</span><span class="p">][</span><span class="n">product</span><span class="p">][</span><span class="s2">&quot;review&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ReviewGraph.update"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Update reviewers&#39; anomalous scores and products&#39; summaries.</span>
+
+<span class="sd">        For each user :math:`u`, update messages to every product :math:`p`</span>
+<span class="sd">        the user reviews. The message function :math:`m_{u\\rightarrow p}`</span>
+<span class="sd">        takes one argument i.e. label of the receiver product.</span>
+<span class="sd">        The label is one of {good, bad}.</span>
+<span class="sd">        Therefore, we need to compute updated :math:`m_{u\\rightarrow p}(good)`</span>
+<span class="sd">        and :math:`m_{u\\rightarrow p}(bad)`.</span>
+
+<span class="sd">        The updated messages are defined as</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">           m_{u\\rightarrow p}(y_{j}) \\leftarrow</span>
+<span class="sd">            \\alpha_{1} \\sum_{y_{i} \\in \\cal{L}_{\\cal{U}}}</span>
+<span class="sd">            \\psi_{ij}^{s}(y_{i}, y_{j}) \\phi^{\\cal{U}}_{i}(y_{i})</span>
+<span class="sd">            \\prod_{Y_{k} \\in \\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}/p}</span>
+<span class="sd">            m_{k \\rightarrow i}(y_{i}),</span>
+
+<span class="sd">        where :math:`y_{j} \\in {good, bad}`, and</span>
+<span class="sd">        :math:`\\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}/p` means a set of product</span>
+<span class="sd">        the user :math:`u` reviews but except product :math:`p`.</span>
+
+<span class="sd">        For each product :math:`p`, update message to every user :math:`u`</span>
+<span class="sd">        who reviews the product. The message function :math:`m_{p\\rightarrow u}`</span>
+<span class="sd">        takes one argument i.e. label of the receiver user.</span>
+<span class="sd">        The label is one of {honest, fraud}.</span>
+<span class="sd">        Thus, we need to compute updated :math:`m_{p\\rightarrow u}(honest)`</span>
+<span class="sd">        and :math:`m_{p\\rightarrow u}(fraud)`.</span>
+
+<span class="sd">        The updated messages are defined as</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">           m_{p\\rightarrow u}(y_{i}) \\leftarrow</span>
+<span class="sd">           \\alpha_{3} \\sum_{y_{j} \\in \\cal{L}_{\\cal{P}}}</span>
+<span class="sd">           \\psi_{ij}^{s}(y_{i}, y_{j}) \\phi^{\\cal{P}}_{j}(y_{j})</span>
+<span class="sd">           \\prod_{Y_{k} \\in \\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/u}</span>
+<span class="sd">           m_{k\\rightarrow j}(y_{j}),</span>
+
+<span class="sd">        where :math:`y_{i} \\in {honest, fraud}`, and</span>
+<span class="sd">        :math:`\\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/u` means a set of users</span>
+<span class="sd">        who review the product :math:`p` but except user :math:`u`,</span>
+
+<span class="sd">        This method runs one iteration of update for both reviewers, i.e. users</span>
+<span class="sd">        and products. It returns the maximum difference between an old message</span>
+<span class="sd">        value and the associated new message value. You can stop iteration when</span>
+<span class="sd">        the update gap reaches satisfied small value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          maximum difference between an old message value and its updated new</span>
+<span class="sd">          value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="c1"># Update messages from users to products.</span>
+        <span class="k">for</span> <span class="n">reviewer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviewers</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_products</span><span class="p">(</span><span class="n">reviewer</span><span class="p">):</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">plabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">):</span>
+                    <span class="n">new</span><span class="p">[</span><span class="n">plabel</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_user_to_product</span><span class="p">(</span>
+                        <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">plabel</span><span class="p">)</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="o">*</span><span class="n">new</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+                <span class="n">review</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">plabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">):</span>
+                    <span class="n">updated</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">plabel</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span>
+                    <span class="n">diff</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">user_to_product</span><span class="p">(</span><span class="n">plabel</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">updated</span><span class="p">)))</span>
+                    <span class="n">review</span><span class="o">.</span><span class="n">update_user_to_product</span><span class="p">(</span><span class="n">plabel</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
+
+        <span class="c1"># Update messages from products to users.</span>
+        <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">products</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">reviewer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_reviewers</span><span class="p">(</span><span class="n">product</span><span class="p">):</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">ulabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">):</span>
+                    <span class="n">new</span><span class="p">[</span><span class="n">ulabel</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_product_to_user</span><span class="p">(</span>
+                        <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">ulabel</span><span class="p">)</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="o">*</span><span class="n">new</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+                <span class="n">review</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">ulabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">):</span>
+                    <span class="n">updated</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">ulabel</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span>
+                    <span class="n">diff</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">product_to_user</span><span class="p">(</span><span class="n">ulabel</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">updated</span><span class="p">)))</span>
+                    <span class="n">review</span><span class="o">.</span><span class="n">update_product_to_user</span><span class="p">(</span><span class="n">ulabel</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">diff</span></div>
+
+    <span class="k">def</span> <span class="nf">_update_user_to_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">plabel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute an updated message from a user to a product with a product label.</span>
+
+<span class="sd">        The updated message is defined as</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">           m_{u\\rightarrow p}(y_{j}) \\leftarrow</span>
+<span class="sd">            \\alpha_{1} \\sum_{y_{i} \\in \\cal{L}_{\\cal{U}}}</span>
+<span class="sd">            \\psi_{ij}^{s}(y_{i}, y_{j}) \\phi^{\\cal{U}}_{i}(y_{i})</span>
+<span class="sd">            \\prod_{Y_{k} \\in \\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}/p}</span>
+<span class="sd">            m_{k \\rightarrow i}(y_{i}),</span>
+
+<span class="sd">        where :math:`y_{j} \\in {good, bad}`, and</span>
+<span class="sd">        :math:`\\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}/p` means a set of product</span>
+<span class="sd">        the user :math:`u` reviews but except product :math:`p`.</span>
+<span class="sd">        The :math:`\\psi_{ij}^{s}(y_{i}, y_{j})` takes :math:`\\epsilon` as a</span>
+<span class="sd">        hyper parameter, self.epsilon is used for it.</span>
+
+<span class="sd">        This method returns a logarithm of the updated message.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          reviewer: Reviewer,</span>
+<span class="sd">          product: Product,</span>
+<span class="sd">          plabel: produce label,</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a logarithm of the updated message from the given reviewer to the</span>
+<span class="sd">          given product with the given product label.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">review</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">ulabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">):</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">ulabel</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">psi</span><span class="p">(</span><span class="n">ulabel</span><span class="p">,</span> <span class="n">plabel</span><span class="p">,</span> <span class="n">review</span><span class="o">.</span><span class="n">evaluation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">))</span> \
+                <span class="o">+</span> <span class="n">phi_u</span><span class="p">(</span><span class="n">ulabel</span><span class="p">)</span> \
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_message_from_products</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">ulabel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="o">*</span><span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_update_product_to_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">ulabel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute an updated message from a product to a user with a user label.</span>
+
+<span class="sd">        The updated message is defined as</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">           m_{p\\rightarrow u}(y_{i}) \\leftarrow</span>
+<span class="sd">           \\alpha_{3} \\sum_{y_{j} \\in \\cal{L}_{\\cal{P}}}</span>
+<span class="sd">           \\psi_{ij}^{s}(y_{i}, y_{j}) \\phi^{\\cal{P}}_{j}(y_{j})</span>
+<span class="sd">           \\prod_{Y_{k} \\in \\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/u}</span>
+<span class="sd">           m_{k\\rightarrow j}(y_{j}),</span>
+
+<span class="sd">        where :math:`y_{i} \\in {honest, fraud}`, and</span>
+<span class="sd">        :math:`\\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/u` means a set of users</span>
+<span class="sd">        who review the product :math:`p` but except user :math:`u`,</span>
+<span class="sd">        The :math:`\\psi_{ij}^{s}(y_{i}, y_{j})` takes :math:`\\epsilon` as a</span>
+<span class="sd">        hyper parameter, self.epsilon is used for it.</span>
+
+<span class="sd">        This method returns a logarithm of the updated message.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          reviewer: Reviewer i.e. a user,</span>
+<span class="sd">          product: Product,</span>
+<span class="sd">          ulabel: user label,</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a logarithm of the updated message from the given product to the</span>
+<span class="sd">          given reviewer with the given user label.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">review</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">plabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">):</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">plabel</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">psi</span><span class="p">(</span><span class="n">ulabel</span><span class="p">,</span> <span class="n">plabel</span><span class="p">,</span> <span class="n">review</span><span class="o">.</span><span class="n">evaluation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">epsilon</span><span class="p">))</span> \
+                <span class="o">+</span> <span class="n">phi_p</span><span class="p">(</span><span class="n">plabel</span><span class="p">)</span> \
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_message_from_users</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">plabel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="o">*</span><span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<div class="viewcode-block" id="ReviewGraph.prod_message_from_users"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.prod_message_from_users">[docs]</a>    <span class="k">def</span> <span class="nf">prod_message_from_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">plabel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute a product of messages to a product except from a reviewer.</span>
+
+<span class="sd">        This helper function computes a logarithm of the product of messages such as</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">           \\prod_{Y_{k} \\in \\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/user}</span>
+<span class="sd">           m_{k\\rightarrow j}(y_{j}),</span>
+
+<span class="sd">        where :math:`\\cal{N}_{j} \\cap \\cal{Y}^{\\cal{U}}/user` means a set</span>
+<span class="sd">        of reviewers who review the given product except the given reviewer,</span>
+<span class="sd">        :math:`y_{j}` is a product label and one of the {GOOD, BAD}.</span>
+
+<span class="sd">        If reviewer is None, compute a product of all messages sending to the</span>
+<span class="sd">        product.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          reviewer: Reviewer, can be None,</span>
+<span class="sd">          product : Product,</span>
+<span class="sd">          plabel: product label</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a logarithm of the product defined above.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reviewers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retrieve_reviewers</span><span class="p">(</span><span class="n">product</span><span class="p">))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">reviewer</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span><span class="o">.</span><span class="n">user_to_product</span><span class="p">(</span><span class="n">plabel</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reviewers</span>
+        <span class="p">])</span></div>
+
+<div class="viewcode-block" id="ReviewGraph.prod_message_from_products"><a class="viewcode-back" href="../../modules/fraud_eagle.html#fraud_eagle.graph.ReviewGraph.prod_message_from_products">[docs]</a>    <span class="k">def</span> <span class="nf">prod_message_from_products</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">ulabel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute a product of messages sending to a reviewer except from a product.</span>
+
+<span class="sd">        This helper function computes a logarithm of the product of messages such as</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">           \\prod_{Y_{k} \\in \\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}/product}</span>
+<span class="sd">           m_{k \\rightarrow i}(y_{i}),</span>
+
+<span class="sd">        where :math:`\\cal{N}_{i} \\cap \\cal{Y}^{\\cal{P}}/product` means a set</span>
+<span class="sd">        of products the given reviewer reviews except the given product,</span>
+<span class="sd">        :math:`y_{i}` is a user label and one of the {HONEST, FRAUD}.</span>
+
+<span class="sd">        If product is None, compute a product of all messages sending to the</span>
+<span class="sd">        reviewer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          reviewer: reviewer object,</span>
+<span class="sd">          product: product object, can be None,</span>
+<span class="sd">          ulabel: user label.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">          a logarithm of the product defined above.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">products</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retrieve_products</span><span class="p">(</span><span class="n">reviewer</span><span class="p">))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">product</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">product_to_user</span><span class="p">(</span><span class="n">ulabel</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">products</span>
+        <span class="p">])</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Junpei Kawamoto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.9.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57f1fa5b740feddd"></script>
+
+
+</body>
+</html>
