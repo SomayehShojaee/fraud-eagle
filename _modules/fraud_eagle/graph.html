@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>fraud_eagle.graph &mdash; Fraud Eagle 0.9.2 documentation</title>
+  <title>fraud_eagle.graph &mdash; Fraud Eagle 0.9.3 documentation</title>
   
 
   
@@ -19,7 +19,7 @@
   
   
     
-      <link rel="search" type="application/opensearchdescription+xml" title="Search within Fraud Eagle 0.9.2 documentation" href="../../_static/opensearch.xml"/>
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within Fraud Eagle 0.9.3 documentation" href="../../_static/opensearch.xml"/>
     
 
   
@@ -35,17 +35,17 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Fraud Eagle 0.9.2 documentation" href="../../index.html"/>
+    <link rel="top" title="Fraud Eagle 0.9.3 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/>
   
   
   
-  <meta name="title" content="Fraud Eagle 0.9.2 documentation"/>
+  <meta name="title" content="Fraud Eagle 0.9.3 documentation"/>
   <meta name="keywords" content="review,data mining,レビュー,マイニング"/>
   
 
   <meta property="og:type" content="article"/>
-  <meta property="og:title" content="Fraud Eagle 0.9.2 documentation"/>
+  <meta property="og:title" content="Fraud Eagle 0.9.3 documentation"/>
   
   <meta property="og:image" content="https://avatars0.githubusercontent.com/u/22570694" />
 
@@ -212,6 +212,7 @@
 <span class="sd">&quot;&quot;&quot;Provide a bipartite graph class implementing Fraud Eagle algorithm.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="k">import</span> <span class="n">getLogger</span>
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">fraud_eagle.constants</span> <span class="k">import</span> <span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">,</span> <span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">,</span> <span class="n">PLUS</span><span class="p">,</span> <span class="n">MINUS</span>
@@ -219,6 +220,9 @@
 <span class="kn">from</span> <span class="nn">fraud_eagle.prior</span> <span class="k">import</span> <span class="n">phi_p</span><span class="p">,</span> <span class="n">phi_u</span>
 <span class="kn">from</span> <span class="nn">common</span> <span class="k">import</span> <span class="n">memoized</span>
 
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;Logging object.&quot;&quot;&quot;</span>
 
 <span class="n">_LOG_POINT_5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="sd">&quot;&quot;&quot;Precomputed value, the logarithm of 0.5.&quot;&quot;&quot;</span>
@@ -633,7 +637,7 @@
 <span class="sd">          maximum difference between an old message value and its updated new</span>
 <span class="sd">          value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">diffs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># Update messages from users to products.</span>
         <span class="k">for</span> <span class="n">reviewer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reviewers</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_products</span><span class="p">(</span><span class="n">reviewer</span><span class="p">):</span>
@@ -645,7 +649,7 @@
                 <span class="n">review</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">plabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">BAD</span><span class="p">):</span>
                     <span class="n">updated</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">plabel</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span>
-                    <span class="n">diff</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span>
+                    <span class="n">diffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span>
                         <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">user_to_product</span><span class="p">(</span><span class="n">plabel</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">updated</span><span class="p">)))</span>
                     <span class="n">review</span><span class="o">.</span><span class="n">update_user_to_product</span><span class="p">(</span><span class="n">plabel</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
 
@@ -660,11 +664,17 @@
                 <span class="n">review</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_review</span><span class="p">(</span><span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">ulabel</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HONEST</span><span class="p">,</span> <span class="n">FRAUD</span><span class="p">):</span>
                     <span class="n">updated</span> <span class="o">=</span> <span class="n">new</span><span class="p">[</span><span class="n">ulabel</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span>
-                    <span class="n">diff</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span>
+                    <span class="n">diffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span>
                         <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">review</span><span class="o">.</span><span class="n">product_to_user</span><span class="p">(</span><span class="n">ulabel</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">updated</span><span class="p">)))</span>
                     <span class="n">review</span><span class="o">.</span><span class="n">update_product_to_user</span><span class="p">(</span><span class="n">ulabel</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">diff</span></div>
+        <span class="n">histo</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Differentials:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;  </span><span class="si">{0}</span><span class="s2">-</span><span class="si">{1}</span><span class="s2">: </span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">histo</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_update_user_to_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">plabel</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute an updated message from a user to a product with a product label.</span>
@@ -838,7 +848,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.9.2',
+            VERSION:'0.9.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
