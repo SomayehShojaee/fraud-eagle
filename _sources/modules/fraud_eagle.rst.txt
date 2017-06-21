@@ -1,5 +1,5 @@
-fraud_eagle package
-===================
+fraud\_eagle package
+====================
 
 .. automodule:: fraud_eagle
     :members:
@@ -9,32 +9,32 @@ fraud_eagle package
 Submodules
 ----------
 
-fraud_eagle.constants module
-----------------------------
+fraud\_eagle\.constants module
+------------------------------
 
 .. automodule:: fraud_eagle.constants
     :members:
     :undoc-members:
     :show-inheritance:
 
-fraud_eagle.graph module
-------------------------
+fraud\_eagle\.graph module
+--------------------------
 
 .. automodule:: fraud_eagle.graph
     :members:
     :undoc-members:
     :show-inheritance:
 
-fraud_eagle.likelihood module
------------------------------
+fraud\_eagle\.likelihood module
+-------------------------------
 
 .. automodule:: fraud_eagle.likelihood
     :members:
     :undoc-members:
     :show-inheritance:
 
-fraud_eagle.prior module
-------------------------
+fraud\_eagle\.prior module
+--------------------------
 
 .. automodule:: fraud_eagle.prior
     :members:
